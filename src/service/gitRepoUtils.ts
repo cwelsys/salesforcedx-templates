@@ -30,10 +30,11 @@ interface RepoInfo {
 const SFDX_STATE_FOLDER = '.sfdx';
 
 /**
- * The full system path to the preferred global state folder
+ * The full system path to the preferred global state folder.
+ * Respects SFDX_HOME env var if set, otherwise falls back to ~/.sfdx.
  */
 export function DIR(): string {
-  return path.join(os.homedir(), SFDX_STATE_FOLDER);
+  return process.env.SFDX_HOME ?? path.join(os.homedir(), SFDX_STATE_FOLDER);
 }
 
 /**
